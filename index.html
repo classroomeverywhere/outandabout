@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Out and About Summer Program · Broomfield, CO</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --green-deep:   #2c3e2d;
+    --green-mid:    #4a7c59;
+    --green-soft:   #7fb08a;
+    --green-pale:   #c8dfc d;
+    --green-wash:   #eef6f0;
+    --gold:         #d4a843;
+    --gold-light:   #f0d080;
+    --cream:        #faf7f0;
+    --warm-white:   #fffdf8;
+    --ink:          #1e2b1f;
+    --ink-mid:      #3d4f3e;
+    --ink-light:    #6b7d6c;
+    --rule:         #d6e8d8;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--warm-white);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    background: var(--green-deep);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  /* layered organic background */
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 80%, rgba(74,124,89,0.45) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 85% 15%, rgba(212,168,67,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse 50% 70% at 60% 90%, rgba(127,176,138,0.2) 0%, transparent 50%);
+  }
+
+  /* sun circle */
+  .hero-sun {
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,168,67,0.22) 0%, rgba(212,168,67,0.08) 50%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* loose horizontal rule lines for texture */
+  .hero-lines {
+    position: absolute; inset: 0;
+    background-image: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 48px,
+      rgba(255,255,255,0.025) 48px,
+      rgba(255,255,255,0.025) 49px
+    );
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 760px;
+  }
+
+  .hero-eyebrow {
+    display: inline-block;
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    font-weight: 500;
+    margin-bottom: 1.75rem;
+    opacity: 0;
+    animation: fadeUp 0.7s 0.2s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Lora', serif;
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.12;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: rgba(250,247,240,0.75);
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--green-deep);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.8s forwards;
+  }
+
+  .hero-cta:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+  .hero-details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem 2rem;
+    margin-top: 3rem;
+    font-size: 0.8rem;
+    color: rgba(250,247,240,0.5);
+    letter-spacing: 0.06em;
+    opacity: 0;
+    animation: fadeUp 0.8s 1s forwards;
+  }
+
+  .hero-details span::before { content: '· '; }
+  .hero-details span:first-child::before { content: ''; }
+
+  /* scroll nudge */
+  .scroll-nudge {
+    position: absolute;
+    bottom: 2rem; left: 50%;
+    transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(250,247,240,0.3);
+    opacity: 0;
+    animation: fadeUp 1s 1.3s forwards;
+  }
+
+  .scroll-arrow {
+    width: 20px; height: 20px;
+    border-right: 1.5px solid rgba(250,247,240,0.3);
+    border-bottom: 1.5px solid rgba(250,247,240,0.3);
+    transform: rotate(45deg);
+    animation: bounce 1.8s infinite;
+  }
+
+  @keyframes bounce {
+    0%,100% { transform: rotate(45deg) translateY(0); }
+    50%      { transform: rotate(45deg) translateY(5px); }
+  }
+
+  /* ─── SHARED SECTION STYLES ─── */
+  section { padding: 5rem 2rem; }
+
+  .section-inner { max-width: 960px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.9rem, 3.5vw, 2.8rem);
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.25rem;
+    color: var(--ink);
+  }
+
+  .section-title em { font-style: italic; color: var(--green-mid); }
+
+  .section-body {
+    font-size: 1rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 620px;
+  }
+
+  /* ─── THE PITCH ─── */
+  .pitch { background: var(--warm-white); }
+
+  .pitch-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .pitch-left { }
+
+  .pitch-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .pitch-card {
+    background: var(--green-wash);
+    border-radius: 14px;
+    padding: 1.4rem 1.6rem;
+    border-left: 4px solid var(--green-soft);
+    transition: transform 0.2s;
+  }
+
+  .pitch-card:hover { transform: translateX(4px); }
+
+  .pitch-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 0.4rem;
+  }
+
+  .pitch-card p {
+    font-size: 0.9rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* ─── THE FEELING ─── */
+  .feeling {
+    background: var(--green-deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .feeling::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 80% at 90% 50%, rgba(74,124,89,0.4) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 5% 20%, rgba(212,168,67,0.12) 0%, transparent 50%);
+  }
+
+  .feeling-inner {
+    position: relative; z-index: 1;
+    max-width: 960px; margin: 0 auto;
+  }
+
+  .feeling .section-label { color: var(--gold-light); }
+
+  .feeling .section-title { color: var(--cream); }
+  .feeling .section-title em { color: var(--gold-light); }
+
+  .feeling-quote {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    font-style: italic;
+    color: rgba(250,247,240,0.88);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 2rem 0;
+    padding-left: 2rem;
+    border-left: 3px solid var(--gold);
+  }
+
+  .feeling-body {
+    font-size: 1rem;
+    color: rgba(250,247,240,0.65);
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+
+  /* ─── WHAT WE DO ─── */
+  .what { background: var(--cream); }
+
+  .days-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .day-card {
+    background: var(--warm-white);
+    border-radius: 18px;
+    padding: 2.25rem 2rem;
+    border: 1.5px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .day-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--green-mid), var(--green-soft));
+  }
+
+  .day-card.gold::after {
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+
+  .day-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--green-mid);
+    margin-bottom: 0.6rem;
+  }
+
+  .day-card.gold .day-label { color: var(--gold); }
+
+  .day-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+  }
+
+  .day-card p {
+    font-size: 0.92rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .day-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .day-list li {
+    font-size: 0.8rem;
+    background: var(--green-wash);
+    color: var(--green-deep);
+    padding: 0.25rem 0.75rem;
+    border-radius: 50px;
+    font-weight: 500;
+  }
+
+  .day-card.gold .day-list li {
+    background: #fdf5e0;
+    color: #7a5c10;
+  }
+
+  /* ─── WHO IT'S FOR ─── */
+  .who { background: var(--warm-white); }
+
+  .who-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .who-card {
+    padding: 1.75rem 1.5rem;
+    border-radius: 14px;
+    background: var(--green-wash);
+    text-align: center;
+  }
+
+  .who-icon {
+    font-size: 2rem;
+    margin-bottom: 0.85rem;
+    display: block;
+  }
+
+  .who-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--green-deep);
+    margin-bottom: 0.5rem;
+  }
+
+  .who-card p {
+    font-size: 0.87rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+    line-height: 1.65;
+  }
+
+  /* ─── CREDENTIALS STRIP ─── */
+  .creds {
+    background: var(--green-wash);
+    padding: 3rem 2rem;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .creds-inner {
+    max-width: 960px; margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem 3rem;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cred-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: var(--ink-mid);
+    font-weight: 400;
+  }
+
+  .cred-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--green-mid);
+    flex-shrink: 0;
+  }
+
+  /* ─── WEEKS & RATES ─── */
+  .weeks { background: var(--cream); }
+
+  .weeks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2.5rem;
+    font-size: 0.92rem;
+  }
+
+  .weeks-table thead th {
+    background: var(--green-deep);
+    color: var(--cream);
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .weeks-table thead th:first-child { border-radius: 8px 0 0 0; }
+  .weeks-table thead th:last-child { border-radius: 0 8px 0 0; }
+
+  .weeks-table tbody tr { border-bottom: 1px solid var(--rule); transition: background 0.15s; }
+  .weeks-table tbody tr:hover { background: var(--green-wash); }
+  .weeks-table tbody tr:last-child { border-bottom: none; }
+
+  .weeks-table td {
+    padding: 0.85rem 1.25rem;
+    color: var(--ink-mid);
+    font-weight: 300;
+  }
+
+  .weeks-table td:first-child { color: var(--ink); font-weight: 500; }
+
+  .rate-note {
+    font-size: 0.87rem;
+    color: var(--ink-light);
+    font-weight: 300;
+    margin-top: 1.25rem;
+    line-height: 1.65;
+  }
+
+  .rate-note strong { color: var(--ink); font-weight: 500; }
+
+  /* ─── OPEN HOUSE ─── */
+  .openhouse {
+    background: var(--warm-white);
+  }
+
+  .oh-card {
+    background: var(--green-deep);
+    border-radius: 20px;
+    padding: 3rem;
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2.5rem;
+  }
+
+  .oh-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,168,67,0.18) 0%, transparent 65%);
+  }
+
+  .oh-card h3 {
+    font-family: 'Lora', serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .oh-card p {
+    font-size: 0.95rem;
+    color: rgba(250,247,240,0.7);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 480px;
+  }
+
+  .oh-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex-shrink: 0;
+  }
+
+  .oh-detail {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem;
+    text-align: center;
+  }
+
+  .oh-detail strong {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.2rem;
+  }
+
+  .oh-detail span {
+    font-size: 0.95rem;
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  /* ─── CTA / REGISTER ─── */
+  .register {
+    background: var(--warm-white);
+    text-align: center;
+  }
+
+  .register-card {
+    background: var(--green-deep);
+    border-radius: 24px;
+    padding: 4rem 3rem;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .register-card::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 100%, rgba(74,124,89,0.5) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 50% at 90% 0%, rgba(212,168,67,0.15) 0%, transparent 50%);
+  }
+
+  .register-inner { position: relative; z-index: 1; }
+
+  .register-card .section-label { color: var(--gold-light); text-align: center; }
+
+  .register-card h2 {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .register-card h2 em { font-style: italic; color: var(--gold-light); }
+
+  .register-card p {
+    font-size: 0.95rem;
+    color: rgba(250,247,240,0.68);
+    font-weight: 300;
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+
+  .register-steps {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .reg-step {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.83rem;
+    color: rgba(250,247,240,0.7);
+    font-weight: 300;
+  }
+
+  .reg-step-num {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold-light);
+    flex-shrink: 0;
+  }
+
+  .reg-arrow {
+    color: rgba(255,255,255,0.2);
+    font-size: 1rem;
+  }
+
+  .register-btn {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--green-deep);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 1.1rem 3rem;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 24px rgba(212,168,67,0.3);
+  }
+
+  .register-btn:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(212,168,67,0.4);
+  }
+
+  .register-sub {
+    display: block;
+    margin-top: 1.25rem;
+    font-size: 0.8rem;
+    color: rgba(250,247,240,0.4);
+    font-weight: 300;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(250,247,240,0.35);
+    font-weight: 300;
+    line-height: 1.8;
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .pitch-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .days-grid { grid-template-columns: 1fr; }
+    .who-grid { grid-template-columns: 1fr; }
+    .oh-card { grid-template-columns: 1fr; }
+    .oh-details { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    .register-steps { flex-direction: column; align-items: center; }
+    .reg-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-sun"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-inner">
+    <span class="hero-eyebrow">Broomfield, CO · Summer 2026 · Ages 5–12</span>
+    <h1>Summer the way<br>it's <em>supposed</em> to feel.</h1>
+    <p class="hero-sub">Small group. Real adventures. A grown-up who genuinely knows your kid. Out and About is the summer program working families have been looking for.</p>
+    <a href="https://forms.gle/4qS4ETqPdEcff2uJA" class="hero-cta">Claim Your Spot</a>
+    <div class="hero-details">
+      <span>Just 4 kids per week</span>
+      <span>8:30 AM – 3:30 PM</span>
+      <span>$350/week · $75/day</span>
+      <span>7 weeks available</span>
+    </div>
+  </div>
+  <div class="scroll-nudge">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══ THE PITCH ═══ -->
+<section class="pitch">
+  <div class="section-inner">
+    <div class="pitch-grid">
+      <div class="pitch-left">
+        <span class="section-label">Why Out and About</span>
+        <h2 class="section-title">You can't take Tuesday off.<br><em>We've got it covered.</em></h2>
+        <p class="section-body">You know those perfect summer days you wish you could give your kid — the library, the zoo, the splash pad, actually making things — but you're at work? That's exactly what we do. Every single day.<br><br>Out and About is a small, intentional summer program run by a veteran educator out of a real home. Not a gymnasium. Not a waitlist. Not a screen. Just a small group of kids having the kind of summer they'll still be talking about when school starts.</p>
+      </div>
+      <div class="pitch-right">
+        <div class="pitch-card">
+          <h3>Only 4 kids. Ever.</h3>
+          <p>This isn't a policy — it's the whole point. Your child will never be a number here. They will be known, heard, and genuinely looked forward to every morning.</p>
+        </div>
+        <div class="pitch-card">
+          <h3>A real educator, not a camp counselor.</h3>
+          <p>17 years in the classroom, a Master's in Curriculum and Instruction, CPR and first aid certified. Your child is safe, engaged, and in genuinely good hands.</p>
+        </div>
+        <div class="pitch-card">
+          <h3>Home base + the world outside.</h3>
+          <p>Some days we're here — making, building, splashing, creating. Other days we're out — the Denver Zoo, the Museum of Nature and Science, parks, libraries, makerspaces. Every week is different.</p>
+        </div>
+        <div class="pitch-card">
+          <h3>No two weeks look the same.</h3>
+          <p>The kids drive the agenda. Interests lead the way. This is not a curriculum — it's a summer built around whoever shows up.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ THE FEELING ═══ -->
+<section class="feeling">
+  <div class="feeling-inner">
+    <span class="section-label">The Out and About Difference</span>
+    <h2 class="section-title">Simple. Safe. <em>Genuinely fun.</em></h2>
+    <blockquote class="feeling-quote">
+      "Remember when summers felt like summers? Muddy, curious, unhurried. Kids who came home tired from actually doing things. That's what we're going for."
+    </blockquote>
+    <p class="feeling-body">This isn't institutional summer care. There are no lanyards, no color-coded groups, no identical days. It's a small home, a caring adult, and a handful of kids who get to just be kids — with real adventures built in. We might even learn something along the way. Don't tell the kids.</p>
+  </div>
+</section>
+
+<!-- ═══ WHAT WE DO ═══ -->
+<section class="what">
+  <div class="section-inner">
+    <span class="section-label">The Days</span>
+    <h2 class="section-title">Every day is a little<br><em>different by design.</em></h2>
+    <div class="days-grid">
+      <div class="day-card">
+        <div class="day-label">Home Base Days</div>
+        <h3>Where the magic happens at home.</h3>
+        <p>Our home base is cozy, comfortable, and fully stocked for a day of creating and exploring. Kids relax, make things, get messy, and just exist without a schedule telling them what to feel next.</p>
+        <ul class="day-list">
+          <li>Arts & crafts</li>
+          <li>STEM projects</li>
+          <li>Building challenges</li>
+          <li>Water play</li>
+          <li>Sandbox time</li>
+          <li>Free exploration</li>
+        </ul>
+      </div>
+      <div class="day-card gold">
+        <div class="day-label">Out & About Days</div>
+        <h3>The adventures you wish you could take them on.</h3>
+        <p>We get out into the community and do the things working parents wish they could do on a Tuesday. Real places, real experiences, small group — so every kid actually gets to be present.</p>
+        <ul class="day-list">
+          <li>Denver Zoo</li>
+          <li>Nature & Science Museum</li>
+          <li>Public library</li>
+          <li>Makerspace</li>
+          <li>Splash pads</li>
+          <li>Local parks</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHO IT'S FOR ═══ -->
+<section class="who">
+  <div class="section-inner">
+    <span class="section-label">Is This Right for Your Family?</span>
+    <h2 class="section-title">Out and About is especially great for<em>...</em></h2>
+    <div class="who-grid">
+      <div class="who-card">
+        <span class="who-icon">🌿</span>
+        <h3>Kids who thrive when they're truly known</h3>
+        <p>Some children bloom in small settings where an adult actually remembers what they care about. That's every day here.</p>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">✨</span>
+        <h3>Neurodiverse learners</h3>
+        <p>Flexible, low-pressure, child-led days with an educator who knows how to meet kids where they are. No one gets lost here.</p>
+      </div>
+      <div class="who-card">
+        <span class="who-icon">🏡</span>
+        <h3>Families who want more than babysitting</h3>
+        <p>Real enrichment, real adventures, real engagement — without the commitment of a full-season program or the chaos of a big camp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CREDENTIALS ═══ -->
+<div class="creds">
+  <div class="creds-inner">
+    <div class="cred-item"><div class="cred-dot"></div>17 years classroom experience</div>
+    <div class="cred-item"><div class="cred-dot"></div>Master's in Curriculum & Instruction</div>
+    <div class="cred-item"><div class="cred-dot"></div>Current CPR & pediatric first aid certified</div>
+    <div class="cred-item"><div class="cred-dot"></div>EpiPen & inhaler administration certified</div>
+    <div class="cred-item"><div class="cred-dot"></div>All adults fingerprinted & background checked</div>
+    <div class="cred-item"><div class="cred-dot"></div>Fully business insured</div>
+    <div class="cred-item"><div class="cred-dot"></div>Licensed-exempt family program · Classroom Everywhere LLC</div>
+  </div>
+</div>
+
+<!-- ═══ WEEKS & RATES ═══ -->
+<section class="weeks">
+  <div class="section-inner">
+    <span class="section-label">Availability · Summer 2026</span>
+    <h2 class="section-title">Pick your weeks.<br><em>Spots go fast.</em></h2>
+    <table class="weeks-table">
+      <thead>
+        <tr>
+          <th>Week</th>
+          <th>Dates</th>
+          <th>Rate</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Week 1</td><td>May 27–30</td><td>$300</td><td>Memorial Day week — 4 days</td></tr>
+        <tr><td>Week 2</td><td>June 2–6</td><td>$350</td><td></td></tr>
+        <tr><td>Week 3</td><td>June 9–13</td><td>$350</td><td></td></tr>
+        <tr><td>Week 4</td><td>June 23–27</td><td>$350</td><td></td></tr>
+        <tr><td>Week 5</td><td>July 7–11</td><td>$350</td><td></td></tr>
+        <tr><td>Week 6</td><td>July 14–18</td><td>$350</td><td></td></tr>
+        <tr><td>Week 7</td><td>July 28 – Aug 1</td><td>$350</td><td></td></tr>
+      </tbody>
+    </table>
+    <p class="rate-note"><strong>Individual days also available at $75/day</strong> — 7 days advance notice required. Maximum 4 children enrolled per week. Spots are confirmed upon receipt of full payment via Venmo.</p>
+  </div>
+</section>
+
+<!-- ═══ OPEN HOUSE ═══ -->
+<section class="openhouse">
+  <div class="section-inner">
+    <span class="section-label">Come Say Hello First</span>
+    <h2 class="section-title">You're invited to our<br><em>Open House.</em></h2>
+    <div class="oh-card">
+      <div>
+        <h3>Drop in before camp starts.</h3>
+        <p>Come see the space, meet the dog, ask every question you have, and let your child get comfortable before day one. No pressure, no commitment required — just a warm welcome and a chance to make sure this feels right for your family.</p>
+      </div>
+      <div class="oh-details">
+        <div class="oh-detail">
+          <strong>Date</strong>
+          <span>Sunday, May 24th</span>
+        </div>
+        <div class="oh-detail">
+          <strong>Time</strong>
+          <span>10:00 – 11:00 AM</span>
+        </div>
+        <div class="oh-detail">
+          <strong>Format</strong>
+          <span>Drop-in · All welcome</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ REGISTER ═══ -->
+<section class="register" id="register">
+  <div class="register-card">
+    <div class="register-inner">
+      <span class="section-label">Ready? Let's do this.</span>
+      <h2>Four spots.<br>Seven weeks.<br><em>One form to get started.</em></h2>
+      <p>Fill out the quick interest form below and I'll follow up within 24 hours with everything you need — program packet, policies, and payment instructions to lock in your spot.</p>
+      <div class="register-steps">
+        <div class="reg-step">
+          <div class="reg-step-num">1</div>
+          <span>Fill out the form</span>
+        </div>
+        <div class="reg-arrow">→</div>
+        <div class="reg-step">
+          <div class="reg-step-num">2</div>
+          <span>Receive follow-up within 24 hrs</span>
+        </div>
+        <div class="reg-arrow">→</div>
+        <div class="reg-step">
+          <div class="reg-step-num">3</div>
+          <span>Send payment via Venmo</span>
+        </div>
+        <div class="reg-arrow">→</div>
+        <div class="reg-step">
+          <div class="reg-step-num">4</div>
+          <span>Spot confirmed!</span>
+        </div>
+      </div>
+      <a href="https://forms.gle/4qS4ETqPdEcff2uJA" class="register-btn">Fill Out the Interest Form</a>
+      <span class="register-sub">Questions first? Email sararove1000@gmail.com or text 908-812-2724 — always happy to chat before you commit.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <p>
+    Out and About Summer Program &nbsp;·&nbsp; Classroom Everywhere LLC &nbsp;·&nbsp; Broomfield, CO<br>
+    Licensed-exempt family program operating while Family Child Care Home license is pending · All adults fingerprinted & background checked · Business insured<br>
+    sararove1000@gmail.com &nbsp;·&nbsp; 908-812-2724
+  </p>
+</footer>
+
+</body>
+</html>
